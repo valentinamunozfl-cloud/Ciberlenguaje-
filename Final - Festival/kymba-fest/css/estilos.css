@@ -1,0 +1,362 @@
+/* ==========================================================
+   KYMBA FEST 2027 - Hoja de estilos (mobile-first)
+   Breakpoints: base = celular, 768px = tableta, 1100px = escritorio
+   ========================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Unbounded:wght@600;800&display=swap");
+
+:root {
+  --negro: #050505;
+  --gris-oscuro: #1a1a1c;
+  --gris-medio: #3a3a3d;
+  --blanco: #ffffff;
+  --rosa: #ff2d95;
+  --amarillo: #ffd23f;
+  --cian: #1ec8ff;
+  --lima: #d4ff1a;
+  --violeta: #8a5cff;
+  --degradado: linear-gradient(90deg, var(--rosa), var(--amarillo));
+  --degradado-titulo: linear-gradient(90deg, var(--rosa), var(--amarillo), var(--violeta), var(--cian));
+  --fuente-titulo: "Unbounded", "Arial Black", sans-serif;
+  --fuente-texto: "Outfit", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--negro);
+  color: var(--blanco);
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 { font-family: var(--fuente-titulo); line-height: 1.15; margin: 0 0 .75rem; }
+h1 { font-size: 2rem; text-transform: uppercase; }
+h2 { font-size: 1.4rem; text-transform: uppercase; }
+h3 { font-size: 1.05rem; }
+p { margin: 0 0 1rem; }
+
+/* ---------- Enlaces personalizados ---------- */
+a:link { color: var(--cian); text-decoration: none; }
+a:visited { color: var(--violeta); }
+a:hover, a:focus-visible { color: var(--lima); text-decoration: underline; }
+a:active { color: var(--rosa); }
+
+.contenedor { width: min(100% - 2rem, 1200px); margin-inline: auto; }
+.etiqueta-seccion { color: var(--lima); font-size: .9rem; margin-bottom: .25rem; }
+.texto-degradado {
+  background: var(--degradado-titulo);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Botones ---------- */
+.boton, .boton:link, .boton:visited {
+  display: inline-block;
+  padding: .85rem 1.6rem;
+  border-radius: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+}
+.boton-principal, .boton-principal:link, .boton-principal:visited {
+  background: var(--degradado);
+  color: var(--negro);
+}
+.boton-secundario, .boton-secundario:link, .boton-secundario:visited {
+  background: rgba(255,255,255,.18);
+  color: var(--blanco);
+  border: 1px solid rgba(255,255,255,.35);
+}
+.boton:hover, .boton:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(255,45,149,.45);
+  text-decoration: none;
+}
+.boton-principal:hover { color: var(--negro); }
+.boton-secundario:hover { color: var(--lima); }
+
+/* ---------- Encabezado y menú ---------- */
+.encabezado {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(26,26,28,.95);
+  backdrop-filter: blur(8px);
+}
+.encabezado__barra {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .6rem 0; gap: 1rem; flex-wrap: wrap;
+}
+.logo { display: flex; align-items: center; gap: .6rem; }
+.logo:link, .logo:visited { color: var(--blanco); text-decoration: none; }
+.logo img { width: 44px; height: 44px; }
+.logo__texto { font-family: var(--fuente-titulo); font-size: .85rem; line-height: 1.1; }
+.logo__texto small { display: block; font-family: var(--fuente-texto); font-size: .75rem; color: var(--rosa); }
+.logo__texto span { color: var(--amarillo); }
+
+.menu-boton {
+  background: none; border: 0; cursor: pointer; padding: .4rem;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.menu-boton span { display: block; width: 28px; height: 3px; background: var(--blanco); border-radius: 2px; }
+
+.menu { display: none; width: 100%; }
+.menu.abierto { display: block; }
+.menu__lista { list-style: none; margin: 0; padding: .5rem 0 1rem; display: flex; flex-direction: column; gap: .25rem; }
+.menu__lista a:link, .menu__lista a:visited {
+  display: block; padding: .6rem .75rem; color: var(--blanco); border-radius: 8px;
+}
+.menu__lista a:hover, .menu__lista a:focus-visible { background: var(--gris-medio); color: var(--lima); text-decoration: none; }
+.menu__lista a[aria-current="page"] { color: var(--amarillo); border-bottom: 2px solid var(--rosa); }
+.menu__lista .boton-principal:link, .menu__lista .boton-principal:visited { color: var(--negro); text-align: center; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; text-align: center;
+  padding: 3rem 0 2rem;
+  overflow: hidden;
+  background: linear-gradient(rgba(5,5,5,.35), rgba(5,5,5,.85)), url("../img/hero-medellin-movil.webp") center / cover no-repeat;
+}
+.hero__video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+}
+.hero:has(.hero__video)::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(rgba(5,5,5,.35), rgba(5,5,5,.85));
+}
+.hero__contenido, .hero > .contenedor { position: relative; z-index: 2; }
+
+/* ---------- Galería ---------- */
+.galeria { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+.galeria__item { margin: 0; flex: 1 1 100%; position: relative; border-radius: 14px; overflow: hidden; border: 2px solid var(--gris-medio); }
+.galeria__item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.galeria__item:hover img { transform: scale(1.05); }
+.galeria__item figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: .6rem 1rem;
+  background: linear-gradient(transparent, rgba(0,0,0,.85)); font-weight: 600;
+}
+.hero--interna { padding: 2.5rem 0 1.5rem; }
+.hero__sello {
+  display: inline-block; border: 2px solid var(--lima); border-radius: 999px;
+  padding: .15rem .9rem; font-size: .7rem; text-transform: uppercase; margin-bottom: 1rem;
+}
+.hero__fecha {
+  display: inline-block; background: rgba(60,60,64,.8); padding: .5rem 1.5rem;
+  border-radius: 10px; font-size: 1.1rem; margin-bottom: 1rem;
+}
+.hero__descripcion { max-width: 640px; margin: 0 auto 1.25rem; }
+.hero__lugar {
+  display: inline-block; border: 2px solid var(--cian); border-radius: 10px;
+  padding: .4rem 1.2rem; margin-bottom: 1.25rem; background: rgba(30,200,255,.12);
+}
+.hero__acciones { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+.hero__acciones .boton { width: min(100%, 320px); }
+
+/* ---------- Headliners ---------- */
+.seccion { padding: 2.5rem 0; }
+.seccion__cabecera { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.5rem; }
+
+.tarjetas { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; }
+.tarjeta-artista {
+  position: relative; width: min(100%, 360px); aspect-ratio: 1 / 1;
+  border: 2px solid var(--lima); border-radius: 14px; overflow: hidden;
+  display: flex; align-items: flex-end;
+}
+.tarjeta-artista img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tarjeta-artista__texto {
+  position: relative; width: 100%; padding: 1rem;
+  background: linear-gradient(transparent, rgba(0,0,0,.85));
+}
+.tarjeta-artista__dia {
+  display: inline-block; background: var(--rosa); color: var(--blanco);
+  padding: 0 .6rem; border-radius: 6px; font-size: .85rem; margin-bottom: .3rem;
+}
+.tarjeta-artista__dia--domingo { background: var(--cian); color: var(--negro); }
+.tarjeta-artista h3 { margin: 0; }
+.tarjeta-artista p { margin: 0; font-size: .95rem; }
+
+/* ---------- Aliados ---------- */
+.aliados { text-align: center; padding: 2rem 0; }
+.aliados__titulo { color: #bbb; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; }
+.aliados__lista {
+  list-style: none; margin: 1rem 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem 1.5rem; color: #bbb;
+}
+.aliados__lista li { flex: 1 1 40%; font-size: .9rem; }
+
+/* ---------- Tarjetas informativas ---------- */
+.info-tarjetas { display: flex; flex-direction: column; gap: 1.25rem; }
+.info-tarjeta {
+  background: var(--gris-medio); border-radius: 18px; padding: 1.25rem;
+  border-left: 8px solid var(--lima); border-right: 1px solid var(--cian);
+}
+.info-tarjeta--cian { border-left-color: var(--cian); }
+.info-tarjeta--rosa { border-left-color: var(--rosa); }
+.info-tarjeta img { width: 36px; height: 36px; margin-bottom: .5rem; }
+.info-tarjeta h3 { font-size: 1rem; }
+.resalte { color: var(--lima); }
+
+/* ---------- Programación ---------- */
+.dia { margin-bottom: 2rem; }
+.dia__titulo { border-bottom: 3px solid var(--rosa); padding-bottom: .4rem; }
+.dia--domingo .dia__titulo { border-color: var(--cian); }
+.programa { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .75rem; }
+.programa__item {
+  display: flex; gap: 1rem; align-items: center;
+  background: var(--gris-oscuro); border-radius: 12px; padding: .75rem 1rem;
+  border-left: 5px solid var(--lima);
+}
+.programa__hora { font-family: var(--fuente-titulo); font-size: .85rem; color: var(--amarillo); min-width: 5.5rem; }
+.programa__artista { margin: 0; font-weight: 600; }
+.programa__estilo { margin: 0; font-size: .9rem; color: #ccc; }
+
+/* ---------- Información: boletas, preguntas, formulario ---------- */
+.boletas { display: flex; flex-direction: column; gap: 1.25rem; }
+.boleta {
+  background: var(--gris-oscuro); border: 2px solid var(--gris-medio); border-radius: 18px;
+  padding: 1.5rem; text-align: center; display: flex; flex-direction: column; gap: .5rem;
+}
+.boleta--destacada { border-color: var(--rosa); box-shadow: 0 0 24px rgba(255,45,149,.35); }
+.boleta__precio { font-family: var(--fuente-titulo); font-size: 1.5rem; color: var(--amarillo); margin: 0; }
+.boleta ul { list-style: none; margin: 0 0 .5rem; padding: 0; color: #ddd; }
+
+.faq details { background: var(--gris-oscuro); border-radius: 12px; padding: .9rem 1rem; margin-bottom: .75rem; }
+.faq summary { cursor: pointer; font-weight: 600; }
+.faq summary:hover { color: var(--lima); }
+.faq p { margin: .75rem 0 0; }
+
+.formulario { display: flex; flex-direction: column; gap: 1rem; max-width: 560px; }
+.formulario label { display: flex; flex-direction: column; gap: .3rem; font-weight: 600; }
+.formulario input, .formulario textarea {
+  padding: .7rem; border-radius: 10px; border: 1px solid var(--gris-medio);
+  background: var(--gris-oscuro); color: var(--blanco); font: inherit;
+}
+.formulario input:focus, .formulario textarea:focus { outline: 2px solid var(--cian); }
+.formulario button { border: 0; cursor: pointer; font: inherit; font-weight: 600; }
+
+/* ---------- Pie de página ---------- */
+.pie { background: var(--gris-medio); padding: 2rem 0 1.5rem; text-align: center; margin-top: 2rem; }
+.pie__marca { font-family: var(--fuente-titulo); font-size: 1.4rem; margin: 0; }
+.pie__marca span { color: var(--amarillo); }
+.pie__enlaces { list-style: none; padding: 0; margin: 1rem 0; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.pie__copy { color: #aaa; font-size: .85rem; margin: 0; }
+
+/* ==========================================================
+   TABLETA (>= 768px)
+   ========================================================== */
+@media (min-width: 768px) {
+  h1 { font-size: 3rem; }
+  h2 { font-size: 1.9rem; }
+  .hero { padding: 5rem 0 3rem; background-image: linear-gradient(rgba(5,5,5,.35), rgba(5,5,5,.85)), url("../img/hero-medellin.webp"); }
+  .galeria__item { flex: 1 1 calc(50% - 1rem); }
+  .galeria__item--ancha { flex-basis: 100%; }
+  .hero__acciones { flex-direction: row; justify-content: center; }
+  .tarjetas { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .tarjeta-artista { width: calc(50% - .75rem); }
+  .info-tarjetas { flex-direction: row; flex-wrap: wrap; }
+  .info-tarjeta { flex: 1 1 calc(50% - 1.25rem); }
+  .boletas { flex-direction: row; }
+  .boleta { flex: 1; }
+  .aliados__lista li { flex: 0 1 28%; }
+  .pie { text-align: left; }
+  .pie__contenido { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; }
+  .pie__enlaces { margin: 0; }
+}
+
+/* ==========================================================
+   ESCRITORIO (>= 1100px)
+   ========================================================== */
+@media (min-width: 1100px) {
+  h1 { font-size: 4.2rem; }
+  .menu-boton { display: none; }
+  .menu { display: block; width: auto; }
+  .menu__lista { flex-direction: row; align-items: center; padding: 0; gap: 1.25rem; }
+  .encabezado__barra { flex-wrap: nowrap; }
+  .hero { padding: 7rem 0 4rem; }
+  .galeria__item { flex: 1 1 calc(33.33% - 1rem); }
+  .galeria__item--ancha { flex-basis: calc(50% - 1rem); }
+  .tarjetas { flex-wrap: nowrap; }
+  .tarjeta-artista { width: 25%; }
+  .info-tarjeta { flex: 1 1 0; }
+  .aliados__lista li { flex: 0 1 auto; }
+  .programa { display: grid; grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__video { display: none; }
+  .galeria__item img { transition: none; }
+  .boton { transition: none; }
+}
+
+/* ==========================================================
+   Cuenta regresiva, boletas con descuento, viaje, compra
+   ========================================================== */
+.cuenta { text-align: center; padding: 2rem 0 1rem; }
+.cuenta__reloj { display: flex; justify-content: center; gap: .75rem; margin: 1rem 0; }
+.cuenta__bloque {
+  flex: 1 1 0; max-width: 90px; padding: .75rem .25rem; border-radius: 14px;
+  background: var(--gris-oscuro); border: 2px solid var(--cian);
+  display: flex; flex-direction: column; font-size: .8rem; text-transform: uppercase;
+}
+.cuenta__numero { font-family: var(--fuente-titulo); font-size: 1.6rem; color: var(--amarillo); }
+.cuenta__fin { font-family: var(--fuente-titulo); color: var(--lima); }
+
+.aviso-descuento {
+  background: rgba(255,45,149,.15); border: 1px solid var(--rosa); border-radius: 12px;
+  padding: .75rem 1rem; margin: 1rem auto; max-width: 720px;
+}
+.nota { font-size: .85rem; color: #bbb; }
+
+.atajos ul { list-style: none; margin: 0; padding: 1rem 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.atajos a:link, .atajos a:visited {
+  display: block; padding: .35rem .9rem; border-radius: 999px; color: var(--blanco);
+  border: 1px solid var(--gris-medio); font-size: .9rem;
+}
+.atajos a:hover, .atajos a:focus-visible { border-color: var(--lima); color: var(--lima); text-decoration: none; }
+
+.boleta { position: relative; }
+.boleta__antes { margin: 0; color: #999; text-decoration: line-through; }
+.boleta__sello {
+  position: absolute; top: -.8rem; left: 50%; transform: translateX(-50%); margin: 0;
+  background: var(--degradado); color: var(--negro); font-weight: 600; font-size: .8rem;
+  padding: .1rem .9rem; border-radius: 999px;
+}
+
+.viaje { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; flex-direction: column; gap: .75rem; }
+.viaje a:link, .viaje a:visited {
+  display: flex; flex-direction: column; padding: 1rem; border-radius: 14px;
+  background: var(--gris-oscuro); border-left: 6px solid var(--cian); color: var(--blanco);
+}
+.viaje a:hover, .viaje a:focus-visible { border-left-color: var(--lima); text-decoration: none; color: var(--blanco); }
+.viaje span { color: #ccc; font-size: .9rem; }
+
+.ventana {
+  width: min(92vw, 460px); border: 2px solid var(--rosa); border-radius: 18px; padding: 1.5rem;
+  background: var(--gris-oscuro); color: var(--blanco);
+}
+.ventana::backdrop { background: rgba(0,0,0,.75); }
+.ventana select { padding: .7rem; border-radius: 10px; background: var(--negro); color: var(--blanco); border: 1px solid var(--gris-medio); font: inherit; }
+.ventana__acciones { display: flex; flex-wrap: wrap; gap: .75rem; }
+.compra__total { font-size: 1.2rem; margin: 0; }
+.compra__total strong { color: var(--amarillo); font-family: var(--fuente-titulo); }
+.boton { font: inherit; font-weight: 600; text-transform: uppercase; cursor: pointer; }
+button.boton { border: 0; }
+button.boton-secundario { border: 1px solid rgba(255,255,255,.35); color: var(--blanco); background: rgba(255,255,255,.18); }
+
+@media (min-width: 768px) {
+  .cuenta__numero { font-size: 2.4rem; }
+  .cuenta__bloque { max-width: 130px; }
+  .viaje { flex-direction: row; flex-wrap: wrap; }
+  .viaje li { flex: 1 1 calc(50% - .75rem); }
+}
+@media (min-width: 1100px) {
+  .viaje li { flex: 1 1 0; }
+}
